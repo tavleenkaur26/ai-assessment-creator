@@ -1,15 +1,22 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useAssignmentStore } from "@/store/assignmentStore";
+
 import axios from "axios";
 import { useState } from "react";
 
 export default function Home() {
+  const router = useRouter();
   const [title, setTitle] = useState("");
+  const { setAssignmentId } =
+  useAssignmentStore();
 
   const [dueDate, setDueDate] = useState("");
 
   const [instructions, setInstructions] =
     useState("");
+  const [loading, setLoading] = useState(false);
 
   const [questions, setQuestions] = useState([
     {
@@ -52,25 +59,28 @@ export default function Home() {
     e: React.FormEvent
   ) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
-      await axios.post(
-        "http://localhost:5001/assignments",
-        {
-          title,
-          dueDate,
-          instructions,
-
-          questionConfig: questions,
-        }
-      );
-
-      alert("Assignment Created");
-    } catch (error) {
-      console.log(error);
-
-      alert("Error creating assignment");
+  const response = await axios.post(
+    "http://localhost:5001/assignments",
+    {
+      title,
+      dueDate,
+      instructions,
+      questionConfig: questions,
     }
+  );
+  setLoading(false);
+  setAssignmentId(response.data._id);
+  router.push(
+    `/assessment/${response.data._id}`
+  );
+} catch (error) {
+  setLoading(false);
+  console.log(error);
+
+  alert("Error creating assignment");
+}
   };
 
   return (
@@ -225,11 +235,14 @@ export default function Home() {
           </div>
 
           <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 transition-all rounded-xl py-4 font-semibold text-lg"
-          >
-            Generate Assessment
-          </button>
+  type="submit"
+  disabled={loading}
+  className="w-full bg-blue-600 hover:bg-blue-700 transition-all rounded-xl py-4 font-semibold text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+>
+  {loading
+    ? "Generating Assessment..."
+    : "Generate Assessment"}
+</button>
         </form>
       </div>
     </main>
