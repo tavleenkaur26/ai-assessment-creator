@@ -5,6 +5,7 @@ import http from "http"
 import { Server } from "socket.io"
 import { connectDB } from "./services/db";
 import assignmentRoutes from "./routes/assignmentRoutes";
+import pdfRoutes from "./routes/pdfRoutes";
 
 dotenv.config()
 
@@ -21,6 +22,7 @@ const io = new Server(server, {
 app.use(cors())
 app.use(express.json())
 app.use("/assignments", assignmentRoutes);
+app.use("/pdf", pdfRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend running")
