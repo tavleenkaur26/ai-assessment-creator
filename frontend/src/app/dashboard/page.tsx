@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { socket } from "@/lib/socket";
 
 export default function DashboardPage() {
     const [search, setSearch] = useState("");
@@ -12,8 +13,21 @@ export default function DashboardPage() {
     useState<any[]>([]);
 
   useEffect(() => {
-    fetchAssignments();
-  }, []);
+  fetchAssignments();
+
+  socket.on(
+    "assignment-completed",
+    () => {
+      fetchAssignments();
+    }
+  );
+
+  return () => {
+    socket.off(
+      "assignment-completed"
+    );
+  };
+}, []);
 
   const fetchAssignments = async () => {
     try {

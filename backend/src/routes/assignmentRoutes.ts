@@ -5,6 +5,7 @@ import { upload } from "../middleware/upload";
 
 import { generateQuestions }
 from "../services/aiService";
+import { io } from "../index";
 
 const router = express.Router();
 
@@ -31,8 +32,16 @@ router.post(
       generatedPaper;
 
     assignment.status = "completed";
-
     await assignment.save();
+
+    io.emit("assignment-completed", {
+  id: assignment._id,
+  title: assignment.title,
+});
+console.log(
+  "SOCKET EVENT SENT:",
+  assignment.title
+);
 
     res.status(201).json(assignment);
   } catch (error) {
