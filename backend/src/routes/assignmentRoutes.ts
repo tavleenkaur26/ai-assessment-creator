@@ -43,6 +43,21 @@ router.post(
     });
   }
 });
+router.get("/", async (req, res) => {
+  try {
+    const assignments =
+      await Assignment.find()
+        .sort({ createdAt: -1 });
+
+    res.json(assignments);
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Error fetching assignments",
+    });
+  }
+});
 router.get("/:id", async (req, res) => {
   try {
     const assignment =
