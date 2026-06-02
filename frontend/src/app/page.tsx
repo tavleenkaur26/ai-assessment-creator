@@ -11,6 +11,7 @@ export default function Home() {
   const [title, setTitle] = useState("");
   const { setAssignmentId } =
   useAssignmentStore();
+  const [file, setFile] = useState<File | null>(null);
 
   const [dueDate, setDueDate] = useState("");
 
@@ -61,15 +62,25 @@ export default function Home() {
     e.preventDefault();
     setLoading(true);
     try {
-  const response = await axios.post(
-    "http://localhost:5001/assignments",
-    {
-      title,
-      dueDate,
-      instructions,
-      questionConfig: questions,
-    }
-  );
+  const formData = new FormData();
+
+formData.append("title", title);
+formData.append("dueDate", dueDate);
+formData.append("instructions", instructions);
+
+formData.append(
+  "questionConfig",
+  JSON.stringify(questions)
+);
+
+if (file) {
+  formData.append("file", file);
+}
+
+const response = await axios.post(
+  "http://localhost:5001/assignments",
+  formData
+);
   setLoading(false);
   setAssignmentId(response.data._id);
   router.push(
@@ -120,6 +131,28 @@ export default function Home() {
               className="w-full bg-[#1F2937] border border-gray-700 rounded-xl p-4 outline-none"
             />
           </div>
+          <div>
+  <label className="block mb-2 text-sm text-gray-300">
+    Upload PDF / TXT
+  </label>
+
+  <input
+    type="file"
+    accept=".pdf,.txt"
+    onChange={(e) =>
+      setFile(
+        e.target.files?.[0] || null
+      )
+    }
+    className="w-full bg-[#1F2937] border border-gray-700 rounded-xl p-4"
+  />
+
+  {file && (
+    <p className="text-sm text-green-400 mt-2">
+      {file.name}
+    </p>
+  )}
+</div>
 
           <div>
             <label className="block mb-2 text-sm text-gray-300">

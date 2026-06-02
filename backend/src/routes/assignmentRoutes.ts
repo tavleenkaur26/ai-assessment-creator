@@ -1,16 +1,28 @@
 import express from "express";
 
 import Assignment from "../models/Assignment";
+import { upload } from "../middleware/upload";
 
 import { generateQuestions }
 from "../services/aiService";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post(
+  "/",
+  upload.single("file"),
+  async (req, res) => {
   try {
+    const data = {
+  ...req.body,
+  questionConfig: JSON.parse(
+    req.body.questionConfig
+  ),
+  fileName:
+    (req as any).file?.originalname || "",
+};
     const assignment =
-      await Assignment.create(req.body);
+  await Assignment.create(data);
 
     const generatedPaper =
       await generateQuestions(assignment);

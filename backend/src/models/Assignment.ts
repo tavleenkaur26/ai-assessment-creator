@@ -14,6 +14,7 @@ const assignmentSchema = new mongoose.Schema(
     instructions: {
       type: String,
     },
+    fileName: String,
 
     questionConfig: [
       {
