@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-
+import fs from "fs";
 dotenv.config();
 
 import OpenAI from "openai";
@@ -13,14 +13,39 @@ const client = new OpenAI({
 export const generateQuestions = async (
   assignment: any
 ) => {
+    let documentText = "";
+
+if (
+  assignment.filePath &&
+  assignment.filePath.endsWith(".txt")
+) {
+  try {
+    documentText = fs.readFileSync(
+      assignment.filePath,
+      "utf8"
+    );
+  } catch (error) {
+    console.log(
+      "Could not read uploaded file"
+    );
+  }
+}
   const prompt = `
 Generate a structured question paper.
+
+If Document Content is provided,
+create questions strictly from that content.
+
+Do not invent unrelated topics.
 
 Title:
 ${assignment.title}
 
 Instructions:
 ${assignment.instructions}
+
+Document Content:
+${documentText}
 
 Question Configuration:
 ${JSON.stringify(

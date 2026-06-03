@@ -31,11 +31,16 @@ router.post(
   try {
     const data = {
   ...req.body,
+
   questionConfig: JSON.parse(
     req.body.questionConfig
   ),
+
   fileName:
     (req as any).file?.originalname || "",
+
+  filePath:
+    (req as any).file?.path || "",
 };
     const assignment =
   await Assignment.create(data);
