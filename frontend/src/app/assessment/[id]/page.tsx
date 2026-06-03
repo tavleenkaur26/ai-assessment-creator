@@ -44,6 +44,12 @@ export default async function AssessmentPage({
 <p className="text-gray-900">
   <strong>Due Date:</strong> {assignment.dueDate}
 </p>
+{assignment.fileName && (
+   <p className="text-gray-900">
+  <strong>Source File:</strong>{" "}
+  {assignment.fileName}
+</p>
+)}
 <div className="mt-6">
   <RegenerateButton
     id={assignment._id}

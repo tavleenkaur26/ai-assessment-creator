@@ -95,10 +95,10 @@ const response = await axios.post(
   };
 
   return (
-    <main className="min-h-screen bg-[#0B1120] text-white px-6 py-10">
+    <main className="min-h-screen bg-[#F3F4F6] text-gray-900 px-6 py-10">
       <div className="max-w-4xl mx-auto">
         <div className="mb-10">
-          <p className="text-sm text-gray-400 mb-2">
+          <p className="text-sm text-gray-600 mb-2">
             AI Powered Assessment Platform
           </p>
 
@@ -106,7 +106,7 @@ const response = await axios.post(
             Create AI Assessments
           </h1>
 
-          <p className="text-gray-400 mt-4">
+          <p className="text-gray-600 mt-4">
             Generate structured question papers
             with AI instantly.
           </p>
@@ -114,10 +114,10 @@ const response = await axios.post(
 
         <form
           onSubmit={handleSubmit}
-          className="bg-[#111827] border border-gray-800 rounded-2xl p-8 space-y-8 shadow-2xl"
+          className="bg-white border border-gray-200 rounded-2xl p-8 space-y-8 shadow-lg"
         >
           <div>
-            <label className="block mb-2 text-sm text-gray-300">
+            <label className="block mb-2 text-sm text-gray-700">
               Assignment Title
             </label>
 
@@ -128,11 +128,11 @@ const response = await axios.post(
               onChange={(e) =>
                 setTitle(e.target.value)
               }
-              className="w-full bg-[#1F2937] border border-gray-700 rounded-xl p-4 outline-none"
+              className="w-full bg-white border border-gray-300 rounded-xl p-4 outline-none"
             />
           </div>
           <div>
-  <label className="block mb-2 text-sm text-gray-300">
+  <label className="block mb-2 text-sm text-gray-700">
     Upload PDF / TXT
   </label>
 
@@ -144,7 +144,7 @@ const response = await axios.post(
         e.target.files?.[0] || null
       )
     }
-    className="w-full bg-[#1F2937] border border-gray-700 rounded-xl p-4"
+    className="w-full bg-white border border-gray-300 rounded-xl p-4"
   />
 
   {file && (
@@ -155,7 +155,7 @@ const response = await axios.post(
 </div>
 
           <div>
-            <label className="block mb-2 text-sm text-gray-300">
+            <label className="block mb-2 text-sm text-gray-700">
               Due Date
             </label>
 
@@ -165,12 +165,12 @@ const response = await axios.post(
               onChange={(e) =>
                 setDueDate(e.target.value)
               }
-              className="w-full bg-[#1F2937] border border-gray-700 rounded-xl p-4 outline-none"
+              className="w-full bg-white border border-gray-300 rounded-xl p-4 outline-none"
             />
           </div>
 
           <div>
-            <label className="block mb-2 text-sm text-gray-300">
+            <label className="block mb-2 text-sm text-gray-700">
               Additional Instructions
             </label>
 
@@ -180,13 +180,13 @@ const response = await axios.post(
               onChange={(e) =>
                 setInstructions(e.target.value)
               }
-              className="w-full bg-[#1F2937] border border-gray-700 rounded-xl p-4 h-32 outline-none"
+              className="w-full bg-white border border-gray-300 rounded-xl p-4 h-32 outline-none"
             />
           </div>
 
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-semibold">
+              <h2 className="text-2xl font-semibold text-gray-900">
                 Question Configuration
               </h2>
 
@@ -202,7 +202,7 @@ const response = await axios.post(
             {questions.map((q, index) => (
               <div
                 key={index}
-                className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-[#1F2937] p-5 rounded-xl border border-gray-700"
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-gray-50 p-5 rounded-xl border border-gray-200"
               >
                 <select
                   value={q.type}
@@ -213,7 +213,7 @@ const response = await axios.post(
                       e.target.value
                     )
                   }
-                  className="bg-[#111827] p-3 rounded-lg"
+                  className="bg-white border border-gray-300 p-3 rounded-lg text-gray-900"
                 >
                   <option>MCQ</option>
                   <option>Short Answer</option>
@@ -230,7 +230,7 @@ const response = await axios.post(
                       Number(e.target.value)
                     )
                   }
-                  className="bg-[#111827] p-3 rounded-lg"
+                  className="bg-white border border-gray-300 p-3 rounded-lg text-gray-900"
                   placeholder="Count"
                 />
 
@@ -244,7 +244,7 @@ const response = await axios.post(
                       Number(e.target.value)
                     )
                   }
-                  className="bg-[#111827] p-3 rounded-lg"
+                  className="bg-white border border-gray-300 p-3 rounded-lg text-gray-900"
                   placeholder="Marks"
                 />
 
@@ -257,7 +257,7 @@ const response = await axios.post(
                       e.target.value
                     )
                   }
-                  className="bg-[#111827] p-3 rounded-lg"
+                  className="bg-white border border-gray-300 p-3 rounded-lg text-gray-900"
                 >
                   <option>Easy</option>
                   <option>Medium</option>
