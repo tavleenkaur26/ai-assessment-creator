@@ -26,42 +26,50 @@ export default async function AssessmentPage({
   return (
     <main className="min-h-screen bg-[#F3F4F6] py-10 px-4">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] p-10 border border-gray-100">
-        <div className="border-b pb-6 mb-8">
-          <h1 className="text-4xl font-extrabold text-center text-gray-900 tracking-tight">
-            {assignment.title}
-          </h1>
+        <div className="text-center border-b pb-6 mb-8">
+  <h1 className="text-4xl font-bold">
+    AI Generated Assessment
+  </h1>
 
-          <p className="text-center text-gray-500 mt-3">
-            AI Generated Assessment
-          </p>
-        </div>
+  <p className="mt-3 text-gray-500">
+    Smart Question Paper Generator
+  </p>
 
-        <div className="grid grid-cols-3 gap-6 mb-10">
-          <div>
-            <p className="text-sm text-gray-500">
-              Student Name
-            </p>
+  <div className="mt-6 text-sm space-y-2">
+    <p>
+      <strong>Title:</strong>{" "}
+      {assignment.title}
+    </p>
 
-            <div className="border-b mt-6"></div>
-          </div>
+    <p>
+      <strong>Due Date:</strong>{" "}
+      {assignment.dueDate}
+    </p>
+  </div>
+</div>
 
-          <div>
-            <p className="text-sm text-gray-500">
-              Roll Number
-            </p>
+        <div className="grid md:grid-cols-3 gap-6 mb-10">
+  <div>
+    <p className="font-semibold">
+      Student Name
+    </p>
+    <div className="border-b mt-6"></div>
+  </div>
 
-            <div className="border-b mt-6"></div>
-          </div>
+  <div>
+    <p className="font-semibold">
+      Roll Number
+    </p>
+    <div className="border-b mt-6"></div>
+  </div>
 
-          <div>
-            <p className="text-sm text-gray-500">
-              Section
-            </p>
-
-            <div className="border-b mt-6"></div>
-          </div>
-        </div>
-
+  <div>
+    <p className="font-semibold">
+      Section
+    </p>
+    <div className="border-b mt-6"></div>
+  </div>
+</div>
         <div className="space-y-10">
           {paper.sections.map(
             (section: any, index: number) => (
@@ -70,9 +78,9 @@ export default async function AssessmentPage({
                 className="border border-gray-200 rounded-2xl p-6 bg-white shadow-sm"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900">
-                    {section.title}
-                  </h2>
+                  <h2 className="text-2xl font-bold mb-6 border-b pb-2">
+  {section.title}
+</h2>
 
                   <div className="bg-gray-100 px-4 py-2 rounded-lg text-sm">
                     Attempt all questions
