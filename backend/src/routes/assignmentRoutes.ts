@@ -98,5 +98,37 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
+router.post("/:id/regenerate", async (req, res) => {
+  try {
+    const assignment =
+      await Assignment.findById(
+        req.params.id
+      );
+
+    if (!assignment) {
+      return res.status(404).json({
+        message: "Assignment not found",
+      });
+    }
+
+    const generatedPaper =
+      await generateQuestions(
+        assignment
+      );
+
+    assignment.generatedPaper =
+      generatedPaper;
+
+    await assignment.save();
+
+    res.json(assignment);
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      message: "Regeneration failed",
+    });
+  }
+});
 
 export default router;

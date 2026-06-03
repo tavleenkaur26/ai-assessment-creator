@@ -1,3 +1,4 @@
+import RegenerateButton from "@/components/RegenerateButton";
 async function getAssignment(id: string) {
   const res = await fetch(
     `http://localhost:5001/assignments/${id}`,
@@ -43,6 +44,11 @@ export default async function AssessmentPage({
 <p className="text-gray-900">
   <strong>Due Date:</strong> {assignment.dueDate}
 </p>
+<div className="mt-6">
+  <RegenerateButton
+    id={assignment._id}
+  />
+</div>
   </div>
 </div>
 
