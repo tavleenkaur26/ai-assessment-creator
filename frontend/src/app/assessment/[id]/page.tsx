@@ -27,46 +27,44 @@ export default async function AssessmentPage({
     <main className="min-h-screen bg-[#F3F4F6] py-10 px-4">
       <div className="max-w-5xl mx-auto bg-white rounded-3xl shadow-[0_10px_40px_rgba(0,0,0,0.08)] p-10 border border-gray-100">
         <div className="text-center border-b pb-6 mb-8">
-  <h1 className="text-4xl font-bold">
+  <h1 className="text-4xl font-bold text-gray-900">
     AI Generated Assessment
   </h1>
 
-  <p className="mt-3 text-gray-500">
+  <p className="mt-3 text-gray-700">
     Smart Question Paper Generator
   </p>
 
   <div className="mt-6 text-sm space-y-2">
-    <p>
-      <strong>Title:</strong>{" "}
-      {assignment.title}
-    </p>
+    <p className="text-gray-900">
+  <strong>Title:</strong> {assignment.title}
+</p>
 
-    <p>
-      <strong>Due Date:</strong>{" "}
-      {assignment.dueDate}
-    </p>
+<p className="text-gray-900">
+  <strong>Due Date:</strong> {assignment.dueDate}
+</p>
   </div>
 </div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-10">
   <div>
-    <p className="font-semibold">
+    <p className="font-semibold text-gray-800">
       Student Name
     </p>
     <div className="border-b mt-6"></div>
   </div>
 
   <div>
-    <p className="font-semibold">
-      Roll Number
-    </p>
+    <p className="font-semibold text-gray-800">
+  Roll Number
+</p>
     <div className="border-b mt-6"></div>
   </div>
 
   <div>
-    <p className="font-semibold">
-      Section
-    </p>
+    <p className="font-semibold text-gray-800">
+  Section
+</p>
     <div className="border-b mt-6"></div>
   </div>
 </div>
@@ -78,11 +76,11 @@ export default async function AssessmentPage({
                 className="border border-gray-200 rounded-2xl p-6 bg-white shadow-sm"
               >
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold mb-6 border-b pb-2">
+                  <h2 className="text-2xl font-bold text-gray-900 mb-6 border-b pb-2">
   {section.title}
 </h2>
 
-                  <div className="bg-gray-100 px-4 py-2 rounded-lg text-sm">
+                  <div className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm">
                     Attempt all questions
                   </div>
                 </div>
