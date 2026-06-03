@@ -40,6 +40,17 @@ export default function DashboardPage() {
       console.log(error);
     }
   };
+  const filteredAssignments =
+
+  assignments.filter((assignment) =>
+
+    assignment.title
+
+      .toLowerCase()
+
+      .includes(search.toLowerCase())
+
+  );
 
   return (
   <main className="min-h-screen bg-[#0B1120] text-white p-8">
@@ -75,14 +86,20 @@ export default function DashboardPage() {
   }
   className="w-full mb-6 bg-[#111827] border border-gray-800 rounded-xl p-4"
 />
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {assignments
-  .filter((assignment) =>
-    assignment.title
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  )
-  .map((assignment) => (
+    {filteredAssignments.length === 0 ? (
+  <div className="text-center py-20">
+    <h2 className="text-2xl font-semibold">
+      No Assignments Yet
+    </h2>
+
+    <p className="text-gray-400 mt-2">
+      Create your first AI assessment.
+    </p>
+  </div>
+) : (
+  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {filteredAssignments.map(
+      (assignment) => (
         <div
   key={assignment._id}
   onClick={() =>
@@ -142,6 +159,8 @@ export default function DashboardPage() {
         </div>
       ))}
     </div>
+    )
+    }
   </main>
 );
 }
