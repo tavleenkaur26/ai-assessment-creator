@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import fs from "fs";
+const pdfParse = require("pdf-parse");
+
 dotenv.config();
 
 import OpenAI from "openai";
@@ -15,15 +17,32 @@ export const generateQuestions = async (
 ) => {
     let documentText = "";
 
-if (
-  assignment.filePath &&
-  assignment.filePath.endsWith(".txt")
-) {
+if (assignment.filePath) {
   try {
-    documentText = fs.readFileSync(
-      assignment.filePath,
-      "utf8"
-    );
+    if (
+      assignment.filePath.endsWith(".txt")
+    ) {
+      documentText =
+        fs.readFileSync(
+          assignment.filePath,
+          "utf8"
+        );
+    }
+
+    else if (
+      assignment.filePath.endsWith(".pdf")
+    ) {
+      const buffer =
+        fs.readFileSync(
+          assignment.filePath
+        );
+
+      const pdfData =
+        await pdfParse(buffer);
+
+      documentText =
+        pdfData.text;
+    }
   } catch (error) {
     console.log(
       "Could not read uploaded file"
