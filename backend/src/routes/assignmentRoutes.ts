@@ -8,6 +8,21 @@ from "../services/aiService";
 import { io } from "../index";
 
 const router = express.Router();
+router.delete("/:id", async (req, res) => {
+  try {
+    await Assignment.findByIdAndDelete(
+      req.params.id
+    );
+
+    res.json({
+      message: "Deleted",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Delete failed",
+    });
+  }
+});
 
 router.post(
   "/",

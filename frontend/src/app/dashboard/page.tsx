@@ -183,6 +183,21 @@ export default function DashboardPage() {
   >
     PDF
   </button>
+
+  <button
+    onClick={async (e) => {
+      e.stopPropagation();
+
+      await axios.delete(
+        `http://localhost:5001/assignments/${assignment._id}`
+      );
+
+      fetchAssignments();
+    }}
+    className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm"
+  >
+    Delete
+  </button>
 </div>
         </div>
       ))}
